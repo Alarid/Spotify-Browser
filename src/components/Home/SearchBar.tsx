@@ -4,6 +4,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import { Search } from 'react-feather'
 import useDebounce from '@rooks/use-debounce'
 import styled from 'styled-components/macro'
+import { transparentize } from 'polished'
 
 type Props = {
   onSearch: (query: string) => void
@@ -12,6 +13,10 @@ type Props = {
 const StyledInputGroup = styled(InputGroup)`
   border-radius: 10px;
   box-shadow: ${({ theme }) => `${theme.outerShadow}, ${theme.innerShadow}`};
+
+  &:focus {
+    border-color: ${({ theme }) => theme.primary.main};
+  }
 `
 
 const StyledInput = styled(FormControl)`
@@ -24,6 +29,7 @@ const StyledInput = styled(FormControl)`
   &:focus {
     background-color: ${({ theme }) => theme.black};
     border-color: transparent;
+    border-bottom: 1px solid ${({ theme }) => transparentize(0.6, theme.primary.main)};
     color: ${({ theme }) => theme.faded};
     outline: none;
     box-shadow: none;

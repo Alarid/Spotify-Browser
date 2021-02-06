@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import styled from 'styled-components/macro'
-import { AlbumResult } from 'src/requests/albums/albums.request.types'
-import { getImage } from '../../helpers/album'
+
+import { AlbumResult } from 'requests/albums/albums.request.types'
+import { getImage } from 'helpers/album'
 
 type Props = {
   results: AlbumResult[]

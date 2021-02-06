@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios'
 import { apiAuthConfig, apiConfig } from './apiConfig'
 import Cookies from 'js-cookie'
 import qs from 'qs'
-import { NewTokenResponse } from 'src/typings/api'
+import { NewTokenResponse } from 'typings/api'
 
 // Instanciate axios
 const axiosInstance: AxiosInstance = axios.create({

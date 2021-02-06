@@ -1,4 +1,4 @@
-import { AlbumCover } from 'src/requests/albums/albums.request.types'
+import { AlbumCover } from 'requests/albums/albums.request.types'
 
 export const getImage = (images: AlbumCover[]): string => {
   const image = images.find((img) => img.width <= 300)

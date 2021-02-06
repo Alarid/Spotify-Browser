@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import styled from 'styled-components/macro'
+import { AlbumResult } from 'src/requests/albums/albums.request.types'
+import { getImage } from '../../helpers/album'
 
 type Props = {
-  albums: Album[]
+  results: AlbumResult[]
 }
 
 const StyledAlbum = styled.div`
@@ -40,9 +42,21 @@ const MadeBy = styled.small`
   color: ${({ theme }) => theme.faded};
 `
 
-const SearchResults: React.FC<Props> = ({ albums }) => {
+const SearchResults: React.FC<Props> = ({ results }) => {
+  const [albums, setAlbums] = useState<Album[]>([])
+
+  useEffect(() => {
+    setAlbums(
+      results.map((result) => ({
+        name: result.name,
+        image: getImage(result.images),
+        artists: result.artists.map((artist) => artist.name).join(', '),
+      }))
+    )
+  }, [results])
+
   return (
-    <Row className="mt-5">
+    <Row>
       {albums.map((album, idx) => (
         <Col key={idx} xs={3} className="mb-3">
           <StyledAlbum>

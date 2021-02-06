@@ -2,7 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Header from './components/Header'
 import { Route, Switch } from 'react-router-dom'
-import { Home } from 'react-feather'
+import Home from './sections/Home'
 
 const App: React.FC = () => {
   return (

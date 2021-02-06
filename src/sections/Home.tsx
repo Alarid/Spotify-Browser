@@ -1,30 +1,34 @@
 import React, { useState } from 'react'
-import SearchBar from '../components/SearchBar'
-import SearchResults from '../components/SearchResults'
-import { getImage } from '../helpers/album'
+import SearchNbResults from 'src/components/Home/SearchNbResults'
+import { SearchAlbumsResponse } from 'src/requests/albums/albums.request.types'
+import SearchBar from '../components/Home/SearchBar'
+import SearchResults from '../components/Home/SearchResults'
 import { searchAlbums } from '../requests/albums/albums.request'
 
 const Home: React.FC = () => {
-  const [results, setResults] = useState<Album[]>([])
+  const [results, setResults] = useState<SearchAlbumsResponse | null>()
+  const [query, setQuery] = useState('')
 
   const handleSearch = async (query: string) => {
-    const searchResults = await searchAlbums(query)
-    if (searchResults) {
-      const items = searchResults.albums.items
-      setResults(
-        items.map((item) => ({
-          name: item.name,
-          image: getImage(item.images),
-          artists: item.artists.map((artist) => artist.name).join(', '),
-        }))
-      )
+    setQuery(query)
+    if (query.trim().length === 0) {
+      setResults(null)
+    } else {
+      const searchResults = await searchAlbums(query)
+      console.log(searchResults)
+      setResults(searchResults)
     }
   }
 
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      <SearchResults albums={results} />
+      <div className="mt-5">
+        {query.trim().length > 0 && (
+          <SearchNbResults query={query} total={results?.albums.total || 0} />
+        )}
+        <SearchResults results={results?.albums.items || []} />
+      </div>
     </>
   )
 }

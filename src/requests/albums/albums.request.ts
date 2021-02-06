@@ -7,7 +7,7 @@ export const searchAlbums = async (search: string): Promise<SearchAlbumsResponse
     const response = await api.get(`search?q=${encodedSearh}&type=album`)
     return response.data
   } catch (error) {
-    console.error('SEARCH ALBUMS / ', error.response.data)
+    console.error('SEARCH ALBUMS / ', error)
     return null
   }
 }

@@ -4,19 +4,21 @@ export type AlbumCover = {
   url: string
 }
 
+export type AlbumResult = {
+  name: string
+  artists: {
+    name: string
+  }[]
+  images: AlbumCover[]
+}
+
 export type SearchAlbumsResponse = {
   albums: {
-    items: {
-      name: string
-      artists: {
-        name: string
-      }[]
-      images: AlbumCover[]
-    }[]
+    items: AlbumResult[]
+    limit: number
+    offset: number
+    total: number
+    next: string
+    previous: string
   }
-  limit: number
-  offset: number
-  total: number
-  next: string
-  previous: string
 }

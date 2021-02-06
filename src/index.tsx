@@ -7,12 +7,15 @@ import { ThemeProvider } from 'styled-components/macro'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { theme } from './styles/theme'
 import GlobalStyles from './styles/GlobalStyles'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <App />
+      <Router>
+        <App />
+      </Router>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,29 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import Header from './components/Header'
+import SearchBar from './components/SearchBar'
+import SearchResults from './components/SearchResults'
+import { getImage } from './helpers/album'
 import { searchAlbums } from './requests/albums/albums.request'
 
 const App: React.FC = () => {
-  const fetchAlbums = async () => {
-    const data = await searchAlbums('hocus pocus')
-    console.log(data)
-  }
+  const [results, setResults] = useState<Album[]>([])
 
-  useEffect(() => {
-    fetchAlbums()
-  }, [])
+  const handleSearch = async (query: string) => {
+    const searchResults = await searchAlbums(query)
+    if (searchResults) {
+      const items = searchResults.albums.items
+      setResults(
+        items.map((item) => ({
+          name: item.name,
+          image: getImage(item.images),
+          artists: item.artists.map((artist) => artist.name).join(', '),
+        }))
+      )
+    }
+  }
 
   return (
     <Container>
-      <Jumbotron className="mt-5">
-        <h1>
-          CRA TypeScript Bootstrap Template{' '}
-          <span role="img" aria-label="rocket emoji">
-            🚀
-          </span>
-        </h1>
-        <p>Ready to roll !</p>
-      </Jumbotron>
+      <Header />
+      <SearchBar onSearch={handleSearch} />
+      <SearchResults albums={results} />
     </Container>
   )
 }

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Spotify Browser",
+  "name": "Browse through Spotify's albums collection",
   "icons": [
     {
       "src": "favicon.ico",

@@ -3,42 +3,92 @@ import { ChevronLeft } from 'react-feather'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import Button from 'components/Shared/Button'
+import { md } from 'styles/media'
 
 type Props = {
   album: AlbumDetails
 }
 
 const Container = styled.div`
-  height: 300px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+
+  ${md(`
+    flex-direction: row;
+    height: 300px;
+    align-items: unset;
+  `)}
 `
 
-const Cover = styled.img`
-  width: 300px;
-  height: 300px;
+const Cover = styled.div`
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: ${({ theme }) => `${theme.outerShadow}, ${theme.innerShadow}`};
+  background-color: ${({ theme }) => theme.black};
+  margin-bottom: 20px;
+
+  ${md(`
+    width: 300px;
+    height: 300px;
+    margin-right: 30px;
+    border-radius: 0;
+    box-shadow: unset;
+    background-color: unset;
+    padding: 0;
+    margin-bottom: 0px;
+  `)}
+`
+
+const CoverImg = styled.img`
   object-fit: cover;
-  margin-right: 30px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `
 
 const Infos = styled.div`
-  height: 100%;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 0;
+  align-items: center;
+
+  ${md(`
+    flex: 1;
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: unset;
+  `)}
+`
+
+const MainInfos = styled.div`
+  text-align: center;
+
+  ${md(`
+    text-align: unset;
+  `)}
 `
 
 const BottomLine = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  ${md(`
+    flex-direction: row;
+  `)}
 `
 
 const Technical = styled.div`
   color: ${(props) => props.theme.faded};
+  margin-bottom: 20px;
+
+  ${md(`
+    margin-bottom: unset;
+  `)}
 `
 
 const AlbumHeader: React.FC<Props> = ({ album }) => {
@@ -46,18 +96,20 @@ const AlbumHeader: React.FC<Props> = ({ album }) => {
 
   return (
     <Container>
-      <Cover src={album.image} alt={`${album.name} album cover`} />
+      <Cover>
+        <CoverImg src={album.image} alt={`${album.name} album cover`} />
+      </Cover>
       <Infos>
-        <section>
+        <MainInfos>
           <h2>{album.name}</h2>
           <p>by {album.artists}</p>
-        </section>
+        </MainInfos>
         <BottomLine>
           <Technical>
             {album.tracks.length} tracks - {album.duration} - {album.release_date}
           </Technical>
           <Button onClick={() => history.goBack()}>
-            <ChevronLeft /> Retour
+            <ChevronLeft /> Back
           </Button>
         </BottomLine>
       </Infos>

@@ -2,6 +2,7 @@ import Explicit from 'components/Shared/Explicit'
 import { getTrackDuration } from 'helpers/album'
 import React from 'react'
 import styled from 'styled-components/macro'
+import { md } from 'styles/media'
 
 type Props = {
   tracks: AlbumTrack[]
@@ -31,12 +32,16 @@ type TrackColProps = {
   strong?: boolean
 }
 const TrackCol = styled.div<TrackColProps>`
-  margin-right: 30px;
+  margin-right: 20px;
   color: ${(props) => (props.strong ? props.theme.white : props.theme.faded)};
 
   &:last-child {
     margin-right: 0;
   }
+
+  ${md(`
+    margin-right: 30px;
+  `)}
 `
 
 const AlbumTracks: React.FC<Props> = ({ tracks }) => {

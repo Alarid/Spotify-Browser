@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import SearchNbResults from 'components/Home/SearchNbResults'
 import SearchBar from 'components/Home/SearchBar'
@@ -6,6 +6,7 @@ import SearchResults from 'components/Home/SearchResults'
 import { searchAlbums } from 'requests/albums/albums.request'
 import { SearchAlbumsResponse } from 'requests/albums/albums.request.types'
 import Button from 'components/Shared/Button'
+import { useHistory, useLocation } from 'react-router-dom'
 
 /**
  * Home Section
@@ -16,6 +17,17 @@ const Home: React.FC = () => {
   const [results, setResults] = useState<SearchAlbumsResponse | null>(null)
   const [query, setQuery] = useState('')
   const [moreLoading, setMoreLoading] = useState(false)
+  const history = useHistory()
+  const search = useLocation().search
+
+  // Check if URL contains a query
+  // If so, launch the corresponding search request
+  useEffect(() => {
+    const query = new URLSearchParams(search).get('q')
+    if (query && query?.trim().length > 0) {
+      handleSearch(query)
+    }
+  }, [])
 
   /**
    * Trigger an API call to search albums
@@ -26,10 +38,15 @@ const Home: React.FC = () => {
     if (query.trim().length === 0) {
       // If query is empty, reset results in state
       setResults(null)
+      history.push({ pathname: '/' })
     } else {
       // Update state with results from API
       const searchResults = await searchAlbums(query)
       setResults(searchResults)
+      history.push({
+        pathname: '/',
+        search: `?q=${encodeURIComponent(query)}`,
+      })
     }
   }
 
@@ -67,7 +84,7 @@ const Home: React.FC = () => {
             <SearchResults results={results.albums.items} />
             <div className="mt-3 mb-5 text-center">
               {total > results.albums.limit + results.albums.offset && (
-                <Button isLoading={moreLoading} onClick={handleShowMore}>
+                <Button loading={moreLoading} onClick={handleShowMore}>
                   Montrer plus
                 </Button>
               )}

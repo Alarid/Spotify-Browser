@@ -12,6 +12,13 @@ type Props = {
   results: AlbumResult[]
 }
 
+// Album link
+const StyledLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`
+
 // Album container
 const StyledAlbum = styled.div`
   width: 100%;
@@ -72,7 +79,7 @@ const SearchResults: React.FC<Props> = ({ results }) => {
     <Row>
       {albums.map((album, idx) => (
         <Col key={idx} xs={3} className="mb-3">
-          <Link to={`/album/${album.id}`}>
+          <StyledLink to={`/album/${album.id}`}>
             <StyledAlbum>
               <Cover>
                 <CoverImg src={album.image} alt={`${album.name} cover`} />
@@ -82,7 +89,7 @@ const SearchResults: React.FC<Props> = ({ results }) => {
                 <MadeBy>by {album.artists}</MadeBy>
               </Infos>
             </StyledAlbum>
-          </Link>
+          </StyledLink>
         </Col>
       ))}
     </Row>

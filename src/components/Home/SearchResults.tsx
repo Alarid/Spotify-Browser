@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 import { AlbumResult } from 'requests/albums/albums.request.types'
 import { getArtists, getImage } from 'helpers/album'
 import { Link } from 'react-router-dom'
+import { lg, md, sm, xl } from 'styles/media'
 
 // Props
 type Props = {
@@ -30,11 +31,27 @@ const StyledAlbum = styled.div`
 // Cover card
 const Cover = styled.div`
   border-radius: 10px;
-  height: 250px;
+  height: 150px;
   padding: 10px;
   box-shadow: ${({ theme }) => `${theme.outerShadow}, ${theme.innerShadow}`};
   background-color: ${({ theme }) => theme.black};
   margin-bottom: 5px;
+
+  ${sm(`
+    height: 180px;
+  `)}
+
+  ${md(`
+    height: 200px;
+  `)}
+
+  ${lg(`
+    height: 220px;
+  `)}
+
+  ${xl(`
+    height: 250px;
+  `)}
 `
 
 // Cover image
@@ -78,7 +95,7 @@ const SearchResults: React.FC<Props> = ({ results }) => {
   return (
     <Row>
       {albums.map((album, idx) => (
-        <Col key={idx} xs={3} className="mb-3">
+        <Col key={idx} xs={6} md={4} lg={3} className="mb-3">
           <StyledLink to={`/album/${album.id}`}>
             <StyledAlbum>
               <Cover>

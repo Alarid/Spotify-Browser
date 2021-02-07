@@ -2,14 +2,19 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import logo from 'logo.png'
 import { Link } from 'react-router-dom'
+import { md } from 'styles/media'
 
 // Header container
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+
+  ${md(`
+    justify-content: flex-start;
+  `)}
 `
 
 /**

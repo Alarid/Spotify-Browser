@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
-import Header from './components/Header'
+import Header from 'components/Shared/Header'
 import { Route, Switch } from 'react-router-dom'
 import Home from 'sections/Home'
 import Album from 'sections/Album'

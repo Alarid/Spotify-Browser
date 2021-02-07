@@ -3,10 +3,12 @@ import { ButtonProps, default as BootstrapButton } from 'react-bootstrap/Button'
 import styled from 'styled-components/macro'
 import { darken } from 'polished'
 
+// Props
 interface Props extends ButtonProps {
   isLoading?: boolean
 }
 
+// Style
 const StyledButton = styled(BootstrapButton)`
   background-color: ${(props) => props.theme.primary.main} !important;
   border-color: ${(props) => props.theme.primary.main} !important;
@@ -22,6 +24,9 @@ const StyledButton = styled(BootstrapButton)`
   }
 `
 
+/**
+ * A generic custom Bootstrap button
+ */
 const Button: React.FC<Props> = ({ children, ...props }) => {
   const { isLoading } = props
   return (

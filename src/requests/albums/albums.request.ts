@@ -14,3 +14,13 @@ export const searchAlbums = async (
     return null
   }
 }
+
+// export const getAlbumDetails = async (id: string): Promise<AlbumDetailsResponse | null> => {
+//   try {
+//     const response = await api.get(`albums/${id}`)
+//     return response.data
+//   } catch (error) {
+//     console.error('GET ALBUM DETAILS / ', error)
+//     return null
+//   }
+// }

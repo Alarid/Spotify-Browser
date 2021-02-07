@@ -5,6 +5,7 @@ export type AlbumCover = {
 }
 
 export type AlbumResult = {
+  id: string
   name: string
   artists: {
     name: string
@@ -20,5 +21,19 @@ export type SearchAlbumsResponse = {
     total: number
     next: string
     previous: string
+  }
+}
+
+export type AlbumDetailsResponse = {
+  id: string
+  name: string
+  artists: {
+    name: string
+  }[]
+  images: AlbumCover[]
+  release_date: string
+  total_tracks: number
+  tracks: {
+    items: AlbumTrack[]
   }
 }

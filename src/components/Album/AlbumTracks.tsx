@@ -1,3 +1,4 @@
+import Explicit from 'components/Shared/Explicit'
 import { getTrackDuration } from 'helpers/album'
 import React from 'react'
 import styled from 'styled-components/macro'
@@ -57,6 +58,11 @@ const AlbumTracks: React.FC<Props> = ({ tracks }) => {
             <TrackCol strong>{track.name}</TrackCol>
           </TrackColGroup>
           <TrackColGroup>
+            {track.explicit && (
+              <TrackCol>
+                <Explicit />
+              </TrackCol>
+            )}
             <TrackCol>{getTrackDuration(track.duration_ms)}</TrackCol>
           </TrackColGroup>
         </TrackRow>

@@ -8,6 +8,8 @@
 
 Browse through Spotify's albums collection 🚀
 
+Check out the [live demo](https://alarid.github.io/Spotify-Browser)
+
 ![screenshot](./public/screenshot.jpeg)
 
 ## Features

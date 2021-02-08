@@ -1,6 +1,12 @@
 import api from '../api'
 import { SearchAlbumsResponse } from './albums.request.types'
 
+/**
+ * Perform an album search with Spotify's API
+ *
+ * @param {string} search - the query
+ * @param {number} offset - for pagination
+ */
 export const searchAlbums = async (
   search: string,
   offset = 0

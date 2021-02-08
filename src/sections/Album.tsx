@@ -11,8 +11,14 @@ import { getArtists, getImage, getTotalDuration } from 'helpers/album'
 import AlbumHeader from 'components/Album/AlbumHeader'
 import AlbumTracks from 'components/Album/AlbumTracks'
 
+// SWR Fetcher
 const fetcher = (query: string) => api.get(query).then((r) => r.data)
 
+/**
+ * Album section
+ *
+ * View details about the album, and its tracklist
+ */
 const Album: React.FC = () => {
   const { albumId } = useParams<{ albumId: string }>()
   const { data, error } = useSWR<AlbumDetailsResponse>(`/albums/${albumId}`, fetcher)
@@ -21,9 +27,7 @@ const Album: React.FC = () => {
   if (error) {
     return (
       <AlbumLayout>
-        <Alert variant="danger">
-          Une erreur est survenue, veuillez nous excuser pour la gêne occasionnée
-        </Alert>
+        <Alert variant="danger">W'oops, something went wrong</Alert>
       </AlbumLayout>
     )
   }

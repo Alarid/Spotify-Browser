@@ -25,7 +25,8 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build"
   ],
   "include": [
     "**/*.ts",

@@ -27,6 +27,7 @@ const Logo = styled.img<LogoProps>`
   object-fit: contain;
 `
 
+// App Title
 const Title = styled.h1`
   a {
     color: ${(props) => props.theme.white} !important;

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import logo from 'logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { md } from 'styles/media'
 
 // Header container
@@ -17,19 +17,43 @@ const Container = styled.div`
   `)}
 `
 
+// App Logo
+interface LogoProps extends React.HTMLProps<HTMLImageElement> {
+  isHome: boolean
+}
+const Logo = styled.img<LogoProps>`
+  width: ${(props) => (props.isHome ? '250px' : '60px')};
+  margin-right: ${(props) => (props.isHome ? '0' : '10px')};
+  object-fit: contain;
+`
+
+const Title = styled.h1`
+  a {
+    color: ${(props) => props.theme.white} !important;
+    text-decoration: none;
+  }
+`
+
 /**
  * App's header
  */
-const Header: React.FC = () => (
-  <Container>
-    <Link to="/">
-      <img src={logo} alt="logo" width="250px" />
-    </Link>
-    <div className="d-flex flex-column">
-      <h1>Spotify Browser</h1>
-      <p className="mt-2">Browse through Spotify's albums collection</p>
-    </div>
-  </Container>
-)
+const Header: React.FC = () => {
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+
+  return (
+    <Container>
+      <Link to="/">
+        <Logo src={logo} alt="logo" isHome={isHome} />
+      </Link>
+      <div className="d-flex flex-column">
+        <Title>
+          <Link to="/">Spotify Browser</Link>
+        </Title>
+        {isHome && <p className="mt-2">Browse through Spotify's albums collection</p>}
+      </div>
+    </Container>
+  )
+}
 
 export default Header

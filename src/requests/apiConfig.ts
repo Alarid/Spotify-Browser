@@ -7,6 +7,7 @@ export const apiConfig = {
   headers: {
     common: {
       'Cache-Control': 'no-cache, no-store, must-revalidate',
+      Pragma: 'no-cache',
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
@@ -24,7 +25,6 @@ export const apiAuthConfig = {
   baseURL: process.env.REACT_APP_SPOTIFY_API_AUTH_URL,
   headers: {
     common: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
       Authorization: `Basic ${basicAuth}`,
     },

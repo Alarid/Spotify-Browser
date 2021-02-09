@@ -15,18 +15,6 @@ export const apiConfig = {
 }
 
 // Encode client ID and SECRET in base 64
-const basicAuth = encode(
+export const authHash = encode(
   `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`
 )
-
-// Config for Spotify Auth API
-export const apiAuthConfig = {
-  timeout: 30000,
-  baseURL: process.env.REACT_APP_SPOTIFY_API_AUTH_URL,
-  headers: {
-    common: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-      Authorization: `Basic ${basicAuth}`,
-    },
-  },
-}

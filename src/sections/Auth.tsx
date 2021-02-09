@@ -9,10 +9,7 @@ import Alert from 'react-bootstrap/Alert'
 const query = `${process.env.REACT_APP_SPOTIFY_API_AUTH_URL}/authorize`
 
 // Redirect URI
-const redirectUri =
-  !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/Spotify-Browser'
-    : process.env.PUBLIC_URL
+const redirectUri = window.location.origin + process.env.PUBLIC_URL
 
 // Query params
 const queryParams = qs.stringify({
